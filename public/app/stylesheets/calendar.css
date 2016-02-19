@@ -1,0 +1,28 @@
+body{
+    font-family: Helvetica;
+    font-weight: 100;
+    text-align: center;
+    font-size: 34px;
+    margin-top: 30px;
+}
+.calendarContainer{
+    height: 720px;
+    width: 600px;
+    background-color: #eee;
+    margin: auto;
+    margin-top: 100px;
+    position: relative;
+    background-image:
+        repeating-linear-gradient(0deg, #ddd, #ddd 1px, transparent 1px, transparent 60px);
+    border: 2px solid #999;
+    border-radius: 3px;
+}
+
+.eventDiv{
+    border: 1px solid #bbb;
+    color: black;
+    margin: 1px;
+    border-radius: 3px;
+    background-color: rgba(218, 241, 222, 0.5);
+    font-size: 14px;
+}
