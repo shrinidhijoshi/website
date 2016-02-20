@@ -1,0 +1,42 @@
+body{
+    font-family: Helvetica;
+    font-weight: 100;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.progressbarWrapper{
+    width: 500px;
+    margin: auto;
+    background: #eee;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+
+}
+
+.progressbar {
+    margin-top: 10px;
+    background: #5A8EDC;
+    height: 20px;
+    border: 1px solid #273C5D;
+    border-radius: 2px;
+    box-sizing: border-box;
+}
+
+.progresstitleandtextwrapper{
+    text-align: left;
+    width: 100%;
+}
+.progressbarTitle{
+    width: 90%;
+    text-align: left;
+    padding: 0px 0px 10px 0px;
+    display: inline-block;
+
+}
+.progresstext{
+    width: 10%;
+    display: inline-block;
+    text-align: right;
+}
