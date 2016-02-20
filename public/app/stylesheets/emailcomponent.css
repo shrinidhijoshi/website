@@ -1,0 +1,73 @@
+body{
+    font-family: Helvetica;
+    font-weight: 100;
+    font-size: 34px;
+    margin-top: 30px;
+}
+.emailComposer{
+    height: 720px;
+    width: 600px;
+    background-color: #eee;
+    margin: auto;
+    margin-top: 100px;
+
+    border: 2px solid #999;
+    border-radius: 3px;
+}
+
+.toAddress{
+    border-bottom: 1px solid #bbb;
+    margin: 20px;
+    background: #eee;
+
+}
+.toAddress input{
+    display: inline-block;
+    height: 40px;
+    font-size: 14px;
+    border: none;
+    background: #eee;
+}
+
+.toAddress input:focus{
+    outline: none;
+}
+
+.contactBiscuit{
+    display: inline-block;
+    height: 20px;
+    font-size: 14px;
+    border: 1px #666 solid;
+    border-radius: 2px;
+    padding: 3px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+.willdelete{
+    background: #D8D8D8;
+}
+.contactDeleteButton{
+    background: none;
+    border: none;
+    font-size: 15px;
+    line-height: 12px;
+    font-family: fantasy;
+    padding: 6px;
+}
+
+.subject{
+
+}
+
+.body{
+
+}
+
+.contactDiv{
+    border: 1px solid #bbb;
+    color: black;
+    margin: 1px;
+    border-radius: 3px;
+    background-color: #efefef;
+    font-size: 14px;
+}
