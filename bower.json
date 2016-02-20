@@ -1,0 +1,31 @@
+{
+  "name": "awesomewalablog",
+  "description": "A website to document everything i do",
+  "main": "index.js",
+  "authors": [
+    "Shrinidhi Joshi (spjoshi31@gmail.com)"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "react"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "/index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "^0.14.7",
+    "react-router": "^2.0.0"
+  }
+}
