@@ -1,0 +1,16 @@
+body{
+    position: relative;
+}
+
+canvas{
+    position: absolute;
+
+    border: 1px solid #ccc;
+    margin-top: -250px;
+    top: 50%;
+    margin-left: -400px;
+    left: 50%;
+    background: black;
+
+
+}
