@@ -1,4 +1,3 @@
-var G = new Vector(0, 40.83);
 var STEP_INTERVAL = 0.01;
 var GLOBAL_X_BOUND = 800;
 var GLOBAL_Y_BOUND = 400;
@@ -10,7 +9,6 @@ var Vector = function(x, y){
     this.y = y;
 }
 
-
 Vector.prototype = {
     inc: function(point){
         this.x += x;
@@ -20,6 +18,9 @@ Vector.prototype = {
         return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
     }
 }
+
+var G = new Vector(0, 40.83);
+
 
 var WorldObject = function(){}
 WorldObject.prototype = {
