@@ -1,9 +1,14 @@
-var STEP_INTERVAL = 0.01;
-var GLOBAL_X_BOUND = 800;
-var GLOBAL_Y_BOUND = 400;
-var GAME_SPEED = 200;
-var BLOCK_GENERATION_INTERVAL = 1500;
+var STEP_INTERVAL = 0.01,
+    GLOBAL_X_BOUND = 800,
+    GLOBAL_Y_BOUND = 400,
+    GAME_SPEED = 200,
+    BLOCK_GENERATION_INTERVAL = 1500,
+    COPTER_X_POSITION = 150,
 
+    //internal-parameters
+    COPTER_COLLISION_SEARCH_WIDTH = 5
+
+var pubsub = window.pubsub;
 var Vector = function(x, y){
     this.x = x;
     this.y = y;
@@ -102,7 +107,7 @@ var ctx = canvas.getContext("2d");
 // create our world and our objects
 var world = Object.create(World.prototype);
 var copterId = world.createObject({
-    pos: new Vector(150,80),
+    pos: new Vector(COPTER_X_POSITION,80),
     v: new Vector(0, 300),
     a: G,
     draw: function(ctx){
@@ -132,6 +137,15 @@ var BlockGenerator = {
                 ctx.fillStyle = "#fff";
                 ctx.fill();
                 ctx.closePath();
+            },
+            emitState: function(){
+                if(this.pos.x < COPTER_X_POSITION + COPTER_COLLISION_SEARCH_WIDTH && this.pos.x > COPTER_X_POSITION - COPTER_COLLISION_SEARCH_WIDTH){
+                    pubsub.pub("block-entered-collision-area", this);
+                }
+
+                if(this.pos.x < 0){
+                    pubsub.pub("block-exited-viewport", this);
+                }
             }
         });
     }
@@ -153,6 +167,15 @@ document.getElementsByTagName("body")[0].onkeyup = function(e){
         copter.setA(G);
     }
 };
+
+pubsub.sub("block-entered-collision-area", function(block){
+    console.log(block.id, block.pos.x, block.pos.y, block.width, block.height);
+});
+
+pubsub.sub("block-exited-viewport", function(blockData){
+    console.log(block.id, block.pos.x, block.pos.y, block.width, block.height);
+});
+
 
 //start the world
 var gameLoopHandler = setInterval(function(){
