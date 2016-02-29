@@ -43,7 +43,9 @@ WorldObject.prototype = {
             this.pos.y = GLOBAL_Y_BOUND - 10;
         }
 
-        console.log(this.pos.x, this.pos.y);
+        if(this.emitState && (this.emitState instanceof Function)){
+            this.emitState();
+        }
     },
 
     getPos: function(){
