@@ -84,16 +84,21 @@ var RestaurentSuggestionEngine = function(){
         },
 
         getCartSLA: function(cart){
-            cart.forEach(function(cartItem){
-                if(longestSLAItem.sla <= cartItem.sla){
-                    longestSLAItem = cartItem;
-                }
-            });
-            return longestSLAItem;
+            if(cart.length > 0){
+                longestSLAItem = cart[0];
+                cart.forEach(function(cartItem){
+                    if(longestSLAItem.sla <= cartItem.sla){
+                        longestSLAItem = cartItem;
+                    }
+                });
+                return longestSLAItem.sla;
+
+            }else{
+                return null;
+            }
+
         }
     }
-
-
 
 };
 
@@ -143,14 +148,14 @@ var restaurents = [{
             name: "dal",
             price: 10,
             prepTime: 5,
-            sensitivity: 1,
+            sensitivity: 0,
         },
         {
             id:2,
             name: "rice",
             price: 40,
             prepTime: 10,
-            sensitivity: 2,
+            sensitivity: 1,
         }
     ]
 
@@ -196,8 +201,10 @@ restaurentSuggestionEngine.init({
     deliveryRadiusSensitive: 2,
     maxServeOrderTime: 45,
 
+
     mapsApi: MapsApi,
 });
-restaurentSuggestionEngine.getRestaurents(restaurents, customer).forEach(function(restaurent){
-    console.log(restaurent);
-})
+var availableRestaurents = restaurentSuggestionEngine.getRestaurents(restaurents, customer);
+var myCart = [];
+restaurentSuggestionEngine.addToCart(myCart, availableRestaurents[0], availableRestaurents[0].itemList[0]);
+console.log(myCart, restaurentSuggestionEngine.getCartSLA(myCart));
