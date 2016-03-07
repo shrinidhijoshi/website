@@ -35,6 +35,7 @@ var RestaurentSuggestionEngine = function(){
         getRestaurents: function(restaurants, customer){
 
             var resultRestaurents = [];
+
             //filter the nearest restaurents based on DELIVERY_RADIUS
             restaurents.forEach(function(restaurent){
 
@@ -56,7 +57,8 @@ var RestaurentSuggestionEngine = function(){
             resultRestaurents.forEach(function(restaurent){
                 restaurent.itemList.forEach(function(item, i){
                     item.sla = restaurent.sla + item.prepTime;
-                    if(item.sla > this.config.maxServeOrderTime && (!item.sensitivity || (item.sensitivity && restaurent.distance < this.config.itemSensitivityToDeliveryRadiusLimitMap[item.sensitivity]))  ){
+
+                    if(item.sla < this.config.maxServeOrderTime && (!item.sensitivity || (item.sensitivity && restaurent.distance < this.config.itemSensitivityToDeliveryRadiusLimitMap[item.sensitivity]))  ){
                         item.deliverable = true;
                     }else{
                         item.deliverable = false;
@@ -159,7 +161,7 @@ var restaurents = [{
             name: "rice",
             price: 40,
             prepTime: 10,
-            sensitivity: 1,
+            sensitivity: 0,
         }
     ]
 
@@ -177,14 +179,14 @@ var restaurents = [{
             name: "dal",
             price: 10,
             prepTime: 5,
-            sensitivity: 1,
+            sensitivity: 0,
         },
         {
             id:2,
             name: "rice",
             price: 40,
             prepTime: 10,
-            sensitivity: 2,
+            sensitivity: 1,
         }
     ]
 
@@ -215,4 +217,6 @@ restaurentSuggestionEngine.init({
 var availableRestaurents = restaurentSuggestionEngine.getRestaurents(restaurents, customer);
 var myCart = [];
 restaurentSuggestionEngine.addToCart(myCart, availableRestaurents[0], availableRestaurents[0].itemList[0]);
+restaurentSuggestionEngine.addToCart(myCart, availableRestaurents[0], availableRestaurents[0].itemList[1]);
+
 console.log(myCart, restaurentSuggestionEngine.getCartSLA(myCart));
