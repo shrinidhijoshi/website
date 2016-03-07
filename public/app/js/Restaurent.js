@@ -56,7 +56,7 @@ var RestaurentSuggestionEngine = function(){
             resultRestaurents.forEach(function(restaurent){
                 restaurent.itemList.forEach(function(item, i){
                     item.sla = restaurent.sla + item.prepTime;
-                    if(item.sla > this.config.maxServeOrderTime && (!item.sensitivity || (item.sensitivity && restaurent.distance < this.config.deliveryRadiusSensitive))  ){
+                    if(item.sla > this.config.maxServeOrderTime && (!item.sensitivity || (item.sensitivity && restaurent.distance < this.config.itemSensitivityToDeliveryRadiusLimitMap[item.sensitivity]))  ){
                         item.deliverable = true;
                     }else{
                         item.deliverable = false;
@@ -77,10 +77,14 @@ var RestaurentSuggestionEngine = function(){
                 cart.restaurent = restaurent;
                 cart.total = 0;
             }
+            if(item.deliverable){
+                cart.push(item);
+                cart.total += item.price;
+                return cart;
+            }else{
+                return null;
+            }
 
-            cart.push(item);
-            cart.total += item.price;
-            return cart;
         },
 
         getCartSLA: function(cart){
@@ -198,9 +202,13 @@ restaurentSuggestionEngine = RestaurentSuggestionEngine();
 restaurentSuggestionEngine.init({
 
     deliveryRadius: 7,
-    deliveryRadiusSensitive: 2,
     maxServeOrderTime: 45,
 
+    itemSensitivityToDeliveryRadiusLimitMap: {
+        0 : 5,
+        1 : 3,
+        2 : 2,
+    },
 
     mapsApi: MapsApi,
 });
