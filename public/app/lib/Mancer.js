@@ -127,11 +127,19 @@ World.prototype = {
         //start the world
         this.gameLoopHandler = setInterval(function(){
 
-            this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+            if(!this.stopped){
+                this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
-            world.advanceWorld();
-            world.renderWorld(this.ctx);
+                world.advanceWorld();
+                world.renderWorld(this.ctx);
+            }
+
 
         }.bind(this), this.tickSpeed*1000);
+    },
+
+    stop: function(){
+        this.stopped = true;
+        clearInterval(this.gameLoopHandler);
     }
 }

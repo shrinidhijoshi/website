@@ -63,7 +63,7 @@ var BlockGenerator = {
             height: this.sizeParams.height,
             draw: function(ctx){
                 ctx.beginPath();
-                ctx.rect(this.pos.x, this.pos.y, this.width, this.height);
+                ctx.rect(this.pos.x - this.width/2, this.pos.y - this.height/2, this.width, this.height);
                 ctx.fillStyle = "#fff";
                 ctx.fill();
                 ctx.closePath();
@@ -83,6 +83,57 @@ var BlockGenerator = {
                 }
                 if(this.pos.y + 10> GLOBAL_Y_BOUND ){
                     this.pos.y = GLOBAL_Y_BOUND - 10;
+                }
+
+
+                var copter = world.getWorldObject(copterId);
+                var block = this;
+                blockTopCorner = {
+                    x:block.pos.x - block.width/2,
+                    y:block.pos.y - block.height/2
+                },
+                blockBottomCorner = {
+                    x:block.pos.x - block.width/2,
+                    y:block.pos.y + block.height/2
+                },
+                blockTopRearCorner = {
+                    x:block.pos.x + block.width/2,
+                    y:block.pos.y - block.height/2
+                },
+                blockBottomRearCorner = {
+                    x:block.pos.x + block.width/2,
+                    y:block.pos.y + block.height/2
+                }
+
+                if(!(block.pos.y + block.height < copter.pos.y - 10 || block.pos.y - block.height > copter.pos.y + 10)){
+                    if(((copter.pos.y >= blockTopCorner.y && copter.pos.y <= blockBottomCorner.y) && (copter.pos.x+10 >= block.pos.x-block.width/2 && copter.pos.x < block.pos.x))){
+                        console.log("copter hit head on!!", copter.pos, block.pos )
+                        world.stop();
+                    }
+                    else if(isHittingCopter(blockTopCorner)){
+                        console.log("copter hit blockTopCorner!!", copter.pos, block.pos )
+                        world.stop();
+                    }
+                    else if(isHittingCopter(blockBottomCorner)){
+                        console.log("copter hit blockBottomCorner!!", copter.pos, block.pos )
+                        world.stop();
+                    }
+                    else if(isHittingCopter(blockTopRearCorner)){
+                        console.log("copter hit blockTopRearCorner!!", copter.pos, block.pos )
+                        world.stop();
+                    }
+                    else if(isHittingCopter(blockBottomRearCorner)){
+                        console.log("copter hit blockBottomRearCorner!!", copter.pos, block.pos )
+                        world.stop();
+                    }
+                    else if(n)
+
+                    posstring = "copter: " + copter.pos.x + " " + copter.pos.y;
+                    blockposString = ">> block: " + block.pos.x + " " + block.pos.y;
+                    console.log(posstring + blockposString);
+
+                    document.getElementById("canvas-world").getContext("2d").font = "15px Monaco";
+                    document.getElementById("canvas-world").getContext("2d").fillText(posstring + blockposString,100,390);
                 }
             },
             emitState: function(){
@@ -132,11 +183,49 @@ world.init({
 });
 
 pubsub.sub("block-entered-collision-area", function(block){
-    console.log(block.id, block.pos.x, block.pos.y, block.width, block.height);
+
+    // var copter = world.getWorldObject(copterId);
+    // blockTopCorner = {
+    //     x:block.pos.x - block.width/2,
+    //     y:block.pos.y - block.height/2
+    // },
+    // blockBottomCorner = {
+    //     x:block.pos.x - block.width/2,
+    //     y:block.pos.y + block.height/2
+    // }
+    //
+    // if(!(block.pos.y + block.height < copter.pos.y - 10 || block.pos.y - block.height > copter.pos.y + 10)){
+    //     if(((copter.pos.y >= blockTopCorner.y && copter.pos.y <= blockBottomCorner.y) && copter.pos.x+10 >= block.pos.x-block.width/2)){
+    //         console.log("copter hit head on!!", copter.pos, block.pos )
+    //         world.stop();
+    //     }
+    //     else if(isHittingCopter(blockTopCorner)){
+    //         console.log("copter hit top!!", copter.pos, block.pos )
+    //         world.stop();
+    //     }
+    //     else if(isHittingCopter(blockBottomCorner)){
+    //         console.log("copter hit bottom!!", copter.pos, block.pos )
+    //         world.stop();
+    //     }
+    //
+    //
+    //
+    //     posstring = "copter: " + copter.pos.x + " " + copter.pos.y;
+    //     blockposString = ">> block: " + block.pos.x + " " + block.pos.y;
+    //     console.log(posstring + blockposString);
+    //
+    //     document.getElementById("canvas-world").getContext("2d").font = "15px Monaco";
+    //     document.getElementById("canvas-world").getContext("2d").fillText(posstring + blockposString,400,390);
+    // }
 });
 
 pubsub.sub("block-exited-viewport", function(block){
-    console.log(block.id, block.pos.x, block.pos.y, block.width, block.height);
+    // console.log(block.id, block.pos.x, block.pos.y, block.width, block.height);
 });
+
+var isHittingCopter = function(pos){
+    var copter = world.getWorldObject(copterId);
+    return (Math.sqrt(Math.pow(copter.pos.x - pos.x,2) + Math.pow(copter.pos.y - pos.y,2) ) <= 10);
+}
 
 world.start();
