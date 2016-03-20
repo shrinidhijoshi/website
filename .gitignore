@@ -3,3 +3,4 @@ bower_components
 .env
 Dockerfile
 docker-compose.yml
+src/js/lib/*
