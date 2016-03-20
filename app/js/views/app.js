@@ -59,7 +59,7 @@ define([
         render: function() {
             this.$el.html(
                 '<header class="header" id="header"></header>'                      +
-                '<nav class="nav"><button data-nav="#home">Home</button><button data-nav="#projects">Projects</button> </nav>' +
+                '<nav class="nav"><button data-nav="#home">Home1</button><button data-nav="#projects">Projects</button> </nav>' +
                 '<main class="content" id="content"></main>'                        +
                 '<footer class="footer" id="footer"></footer>'
             );

@@ -10,7 +10,7 @@ define([
         },
 
         render: function() {
-            this.$el.html("Home");
+            this.$el.html("Home1");
         }
     });
 
