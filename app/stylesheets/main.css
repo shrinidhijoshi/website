@@ -26,9 +26,6 @@ body{
     outline: none;
 }
 .content{
-    margin: 10px;
-    padding: 10px;
-    background: #eee;
 }
 
 .content::after{
@@ -37,4 +34,48 @@ body{
     margin-top: 1.5em;
     height: 0;
     visibility: hidden;
+}
+
+header{
+    padding: 10px;
+    height: 300px;
+    font-size: 13px;
+    text-align: center;
+}
+
+header .greeting{
+    font-size: 40px;
+}
+header img{
+    height: 200px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+
+.headerSection .aboutmetext{
+    font-size: 17px;
+    padding-top: 10px;
+}
+
+.headerSection .braces {
+    font-size: 100px;
+    font-family: MONOSPACE;
+    color: #0EE1EF
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 20px;
+}
+
+.educationSection{
+    text-align: left;;
+}
+.educationSection .degreeTitle{
+    font-weight: bold;
+    font-size: 15px;
+}
+.workSection{
+    text-align: left;
 }

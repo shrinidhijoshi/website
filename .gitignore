@@ -4,3 +4,4 @@ bower_components
 Dockerfile
 docker-compose.yml
 src/js/lib/*
+.DS_Store

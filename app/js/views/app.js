@@ -71,7 +71,6 @@ define([
 
         render: function() {
             this.$el.html(
-                '<header class="header" id="header"></header>'                      +
                 '<main class="content" id="content"></main>'                        +
                 '<footer class="footer" id="footer"></footer>'
             );
