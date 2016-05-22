@@ -72,10 +72,20 @@ header img{
 .educationSection{
     text-align: left;;
 }
-.educationSection .degreeTitle{
+.degreeTitle{
     font-weight: bold;
     font-size: 15px;
 }
 .workSection{
     text-align: left;
+}
+
+.glyph{
+    width: 30px;
+    height: 30px;
+}
+
+.itemDesc{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
