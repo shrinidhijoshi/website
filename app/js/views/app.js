@@ -2,9 +2,11 @@ define([
     "backbone",
     "./home",
     "./projects",
+    "./about",
+
     "css!app/stylesheets/main.css"
 
-], function(Backbone, HomeView, ProjectsView) {
+], function(Backbone, HomeView, ProjectsView, AboutView) {
 
     var AppView = Backbone.View.extend({
         initialize: function(){
@@ -17,7 +19,8 @@ define([
     var AppRouter = Backbone.Router.extend({
         routes: {
             "home": "showHome",
-            "projects": "showProjects"
+            "projects": "showProjects",
+            "about": "showAbout"
         }
     });
     var appRouter = new AppRouter();
@@ -33,6 +36,8 @@ define([
             // this.listenTo(this.model, "change", this.render);
             this.render();
             this.initializeRoutes();
+
+            appRouter.navigate("about", {trigger:true});
         },
 
         navigateMenu: function(e) {
@@ -54,12 +59,19 @@ define([
                     el: this.$('#content')
                 })
             }.bind(this));
+
+            appRouter.on("route:showAbout", function(param1, param2){
+                new AboutView({
+                    el: this.$('#content')
+                })
+            }.bind(this));
+
+
         },
 
         render: function() {
             this.$el.html(
                 '<header class="header" id="header"></header>'                      +
-                '<nav class="nav"><button data-nav="#home">Home1</button><button data-nav="#projects">Projects</button> </nav>' +
                 '<main class="content" id="content"></main>'                        +
                 '<footer class="footer" id="footer"></footer>'
             );

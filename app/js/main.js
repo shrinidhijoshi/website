@@ -8,6 +8,7 @@ require.config({
     map: {
       '*': {
         'css': 'lib/require-css/css',
+        'text':'lib/text',
         'app': '../..'
       }
     }
