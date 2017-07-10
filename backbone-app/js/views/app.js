@@ -37,7 +37,7 @@ define([
             this.render();
             this.initializeRoutes();
 
-            appRouter.navigate("about", {trigger:true});
+            // appRouter.navigate("about", {trigger:true});
         },
 
         navigateMenu: function(e) {
